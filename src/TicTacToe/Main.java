@@ -28,7 +28,7 @@ public class Main {
 			AgentType type = AgentType.valueOf(args[i].toUpperCase());
 			switch(type) {
 			case WIN:
-				//todo
+				agents[i] = new MinimaxAgent(new WinUtility());
 				break;
 			case TIE:
 				//todo

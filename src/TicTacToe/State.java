@@ -3,6 +3,9 @@ package TicTacToe;
 import static TicTacToe.PlayerType.CROSS;
 import static TicTacToe.PlayerType.NOUGHT;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Holds a board and whose turn it is.
  */
@@ -182,6 +185,21 @@ public class State implements Cloneable {
 	
 	public int getHeight() {
 		return height;
+	}
+
+	public Set<Position> getAllActions() {
+		Set<Position> actions = new HashSet<Position>();
+		
+		for(int row = 0; row < board.length; row++) {
+			for(int column = 0; column < board[row].length; column++) {
+				Position currentPos = new Position(column, row);
+				if(getTypeAt(currentPos) == null) {
+					actions.add(currentPos);
+				}
+			}
+		}
+		
+		return actions;
 	}
 
 }

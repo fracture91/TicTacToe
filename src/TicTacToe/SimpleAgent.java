@@ -1,10 +1,6 @@
 package TicTacToe;
 
 public class SimpleAgent extends Agent {
-
-	public SimpleAgent() {
-		name = "Simple";
-	}
 	
 	@Override
 	public Position getNextMove() {
@@ -18,6 +14,11 @@ public class SimpleAgent extends Agent {
 		}
 		//should never happen
 		return null;
+	}
+
+	@Override
+	public String getName() {
+		return "Simple";
 	}
 
 }

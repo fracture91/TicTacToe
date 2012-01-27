@@ -8,7 +8,6 @@ public abstract class Agent {
 	
 	protected State state;
 	protected PlayerType type;
-	protected String name = "Agent";
 
 	/**
 	 * Lets this agent know that a move has been accepted so it can update its internal state.
@@ -36,7 +35,5 @@ public abstract class Agent {
 		type = myType;
 	}
 	
-	public String getName() {
-		return name;
-	}
+	public abstract String getName();
 }
