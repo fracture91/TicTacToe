@@ -7,7 +7,6 @@ public class Minimax {
 
 
 	private final SearchNode root;
-	private final UtilityStrategy strategy;
 	private int nodesVisited;
 	
 	/**
@@ -17,7 +16,6 @@ public class Minimax {
 	 */
 	public Minimax(State initialState, UtilityStrategy strategy) {
 		root = new SearchNode(initialState, null, 0xDEADBEEF, strategy);
-		this.strategy = strategy;
 	}
 	
 	/**

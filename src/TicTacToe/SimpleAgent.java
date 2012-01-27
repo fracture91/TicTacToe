@@ -7,8 +7,8 @@ public class SimpleAgent extends Agent {
 	@Override
 	public Position getNextMove() {
 		nodesVisited = 0;
-		for(int i = 0; i < state.getHeight(); i++) {
-			for(int j = 0; j < state.getWidth(); j++) {
+		for(int i = 0; i < State.getHeight(); i++) {
+			for(int j = 0; j < State.getWidth(); j++) {
 				Position pos = new Position(j, i);
 				nodesVisited++;
 				if(state.getTypeAt(pos) == null) {
