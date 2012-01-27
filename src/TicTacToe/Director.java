@@ -76,6 +76,7 @@ public class Director {
 				printStatistics(player1);
 				print("\n");
 				printStatistics(player2);
+				print("\n");
 			}
 			//state.turn will have changed by now
 			player = getPlayerByType(state.getTurn());
