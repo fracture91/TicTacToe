@@ -111,7 +111,7 @@ public class Director {
 		tryToGiveMove(player, lastMove);
 		boolean human = player instanceof HumanAgent;
 		
-		long startTime = System.nanoTime();
+		final long startTime = System.nanoTime();
 		   
 		do {
 			try {
@@ -149,8 +149,8 @@ public class Director {
 	}
 	
 	private void printStatistics(Agent player) {
-		List<Long> times = timeLogs.get(player);
-		List<Integer> nodes = nodeLogs.get(player);
+		final List<Long> times = timeLogs.get(player);
+		final List<Integer> nodes = nodeLogs.get(player);
 		println(player.getName());
 		print("Nodes,");
 		printList(nodes);
@@ -159,7 +159,7 @@ public class Director {
 	}
 	
 	private void printList(List<?> list) {
-		StringBuilder str = new StringBuilder();
+		final StringBuilder str = new StringBuilder();
 		boolean first = true;
 	    for (Object i : list) {
 	    	if(first) {

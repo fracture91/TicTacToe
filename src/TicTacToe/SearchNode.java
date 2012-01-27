@@ -10,12 +10,14 @@ public class SearchNode extends DefaultMutableTreeNode {
 	private int utility;
 	private final State state;
 	private final UtilityStrategy strategy;
-	private Position lastAction;
+	private final Position lastAction;
 	
 	/**
 	 * Creates a SearchNode with no parent or children
 	 * @param state The state to associate with this node
-	 * @param totalCost The total cost to reach this node's state
+	 * @param lastAction The previous action that led to this state
+	 * @param utility The minimax utility associated with this node
+	 * @param strategy Strategy to use when determining utility of done states
 	 */
 	public SearchNode(State state, Position lastAction, int utility, UtilityStrategy strategy) {
 		this.state = state;

@@ -35,6 +35,9 @@ public abstract class Agent {
 		type = myType;
 	}
 	
+	/**
+	 * @return A friendly name for this agent (e.g. "Human", "Simple")
+	 */
 	public abstract String getName();
 	
 	/**

@@ -1,12 +1,15 @@
 package TicTacToe;
 
+/**
+ * Provides a way to determine utility of a state in the minimax algorithm.
+ */
 public interface UtilityStrategy {
 	
 	/**
 	 * @param state The State to examine
 	 * @return The utility of the given state
 	 */
-	public int getUtility(State state);
+	int getUtility(State state);
 	
 	/**
 	 * Set the player to favor in utility calculations.
@@ -15,11 +18,11 @@ public interface UtilityStrategy {
 	 * 
 	 * @param favored Player to favor
 	 */
-	public void setFavoredPlayer(PlayerType favored);
+	void setFavoredPlayer(PlayerType favored);
 
 	/**
-	 * A friendly name for this strategy.
+	 * @return A friendly name for this strategy.
 	 */
-	public String getName();
+	String getName();
 
 }

@@ -27,7 +27,7 @@ public class Main {
 			return;
 		}
 		
-		Agent[] agents = new Agent[2];
+		final Agent[] agents = new Agent[2];
 		for(int i = 0; i < 2; i++) {
 			AgentType type = AgentType.valueOf(args[i].toUpperCase());
 			switch(type) {
@@ -50,7 +50,8 @@ public class Main {
 		final Director dir = new Director(agents[0], agents[1]);
 		dir.runGame();
 		
-		String filename = "log_" + agents[0].getName() + "_vs_" + agents[1].getName() + ".txt";
+		final String filename = "log_" + agents[0].getName() +
+								"_vs_" + agents[1].getName() + ".txt";
 		final FileWriter output = new FileWriter(filename);
 		output.write(dir.getLog());
 		output.close();

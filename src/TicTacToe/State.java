@@ -179,16 +179,19 @@ public class State implements Cloneable {
 		return str.toString();
 	}
 	
-	public int getWidth() {
+	public static int getWidth() {
 		return width;
 	}
 	
-	public int getHeight() {
+	public static int getHeight() {
 		return height;
 	}
 
+	/**
+	 * @return All possible actions that can be performed from this state
+	 */
 	public Set<Position> getAllActions() {
-		Set<Position> actions = new HashSet<Position>();
+		final Set<Position> actions = new HashSet<Position>();
 		
 		for(int row = 0; row < board.length; row++) {
 			for(int column = 0; column < board[row].length; column++) {

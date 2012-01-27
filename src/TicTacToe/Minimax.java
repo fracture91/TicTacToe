@@ -7,7 +7,7 @@ public class Minimax {
 
 
 	private final SearchNode root;
-	private UtilityStrategy strategy;
+	private final UtilityStrategy strategy;
 	private int nodesVisited;
 	
 	/**
@@ -21,7 +21,7 @@ public class Minimax {
 	}
 	
 	/**
-	 * Returns the best Position to take to maximize utility.
+	 * @return the best Position to take to maximize utility.
 	 */
 	public Position findBestAction() {
 		root.expand();
@@ -30,7 +30,7 @@ public class Minimax {
 		int max = Integer.MIN_VALUE;
 		SearchNode maxNode = null;
 		for(@SuppressWarnings("unchecked")
-				Enumeration<SearchNode> e = root.children(); e.hasMoreElements();) {
+				final Enumeration<SearchNode> e = root.children(); e.hasMoreElements();) {
 			SearchNode i = e.nextElement();
 			int utility = minValue(i);
 			i.setUtility(utility);
@@ -53,7 +53,7 @@ public class Minimax {
 		node.expand();
 		
 		for(@SuppressWarnings("unchecked")
-				Enumeration<SearchNode> e = node.children(); e.hasMoreElements();) {
+				final Enumeration<SearchNode> e = node.children(); e.hasMoreElements();) {
 			SearchNode i = e.nextElement();
 			int utility = maxValue(i);
 			i.setUtility(utility);
@@ -73,7 +73,7 @@ public class Minimax {
 		node.expand();
 		
 		for(@SuppressWarnings("unchecked")
-				Enumeration<SearchNode> e = node.children(); e.hasMoreElements();) {
+				final Enumeration<SearchNode> e = node.children(); e.hasMoreElements();) {
 			SearchNode i = e.nextElement();
 			int utility = minValue(i);
 			i.setUtility(utility);
