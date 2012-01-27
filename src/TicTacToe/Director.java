@@ -3,6 +3,11 @@ package TicTacToe;
 import static TicTacToe.PlayerType.CROSS;
 import static TicTacToe.PlayerType.NOUGHT;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Responsible for pitting two agents against each other.
  * Prints out board after each move.
@@ -15,6 +20,8 @@ public class Director {
 	private State state;
 	private Position lastMove;
 	private StringBuilder log;
+	private Map<Agent, List<Long>> timeLogs;
+	private Map<Agent, List<Integer>> nodeLogs;
 
 	/**
 	 * Create a game between two players
@@ -34,6 +41,12 @@ public class Director {
 		state = new State();
 		player1.initialize(state.clone(), CROSS);
 		player2.initialize(state.clone(), NOUGHT);
+		timeLogs = new HashMap<Agent, List<Long>>();
+		nodeLogs = new HashMap<Agent, List<Integer>>();
+		timeLogs.put(player1, new ArrayList<Long>());
+		timeLogs.put(player2, new ArrayList<Long>());
+		nodeLogs.put(player1, new ArrayList<Integer>());
+		nodeLogs.put(player2, new ArrayList<Integer>());
 		
 		println(player1.getName() + " vs. " + player2.getName());
 		println(state.toString());
@@ -59,6 +72,10 @@ public class Director {
 					Agent winningPlayer = getPlayerByType(winner);
 					println(winner.name() + " Player " + winningPlayer.getName() + " wins.");
 				}
+				print("\n\n");
+				printStatistics(player1);
+				print("\n");
+				printStatistics(player2);
 			}
 			//state.turn will have changed by now
 			player = getPlayerByType(state.getTurn());
@@ -94,6 +111,8 @@ public class Director {
 		tryToGiveMove(player, lastMove);
 		boolean human = player instanceof HumanAgent;
 		
+		long startTime = System.nanoTime();
+		   
 		do {
 			try {
 				lastMove = player.getNextMove();
@@ -109,8 +128,16 @@ public class Director {
 		//allow humans another chance to give a valid move
 		} while (!valid && human);
 		
+		timeLogs.get(player).add(System.nanoTime() - startTime);
+		nodeLogs.get(player).add(player.getNodesVisited());
+		
 		//give its own last move
 		tryToGiveMove(player, lastMove);
+	}
+	
+	private void print(String text) {
+		System.out.print(text);
+		log.append(text);
 	}
 	
 	/**
@@ -118,8 +145,31 @@ public class Director {
 	 * @param line line to print
 	 */
 	private void println(String line) {
-		System.out.println(line);
-		log.append(line + "\n");
+		print(line + "\n");
+	}
+	
+	private void printStatistics(Agent player) {
+		List<Long> times = timeLogs.get(player);
+		List<Integer> nodes = nodeLogs.get(player);
+		println(player.getName());
+		print("Nodes,");
+		printList(nodes);
+		print("\nTimes,");
+		printList(times);
+	}
+	
+	private void printList(List<?> list) {
+		StringBuilder str = new StringBuilder();
+		boolean first = true;
+	    for (Object i : list) {
+	    	if(first) {
+	    		first = !first;
+	    	} else {
+	    		str.append(',');
+	    	}
+	        str.append(i);
+	    }
+	    print(str.toString());
 	}
 	
 	/**

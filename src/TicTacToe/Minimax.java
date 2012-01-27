@@ -8,6 +8,7 @@ public class Minimax {
 
 	private final SearchNode root;
 	private UtilityStrategy strategy;
+	private int nodesVisited;
 	
 	/**
 	 * Create a Minimax instance with the given initial State and UtilityStrategy
@@ -24,6 +25,7 @@ public class Minimax {
 	 */
 	public Position findBestAction() {
 		root.expand();
+		nodesVisited = 0;
 		
 		int max = Integer.MIN_VALUE;
 		SearchNode maxNode = null;
@@ -42,6 +44,7 @@ public class Minimax {
 	}
 	
 	private int minValue(SearchNode node) {
+		nodesVisited++;
 		if(node.getState().isDone()) {
 			return node.getUtility();
 		}
@@ -61,6 +64,7 @@ public class Minimax {
 	}
 
 	private int maxValue(SearchNode node) {
+		nodesVisited++;
 		if(node.getState().isDone()) {
 			return node.getUtility();
 		}
@@ -77,6 +81,13 @@ public class Minimax {
 		}
 		
 		return max;
+	}
+	
+	/**
+	 * @return the number of nodes visited in the search tree
+	 */
+	public int getNodesVisited() {
+		return nodesVisited;
 	}
 
 }

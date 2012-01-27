@@ -3,6 +3,7 @@ package TicTacToe;
 public class MinimaxAgent extends Agent {
 
 	private UtilityStrategy strategy;
+	private int nodesVisited;
 	
 	public MinimaxAgent(UtilityStrategy strategy) {
 		this.strategy = strategy;
@@ -17,12 +18,19 @@ public class MinimaxAgent extends Agent {
 	@Override
 	public Position getNextMove() {
 		Minimax mm = new Minimax(state, strategy);
-		return mm.findBestAction();
+		Position pos = mm.findBestAction();
+		nodesVisited = mm.getNodesVisited();
+		return pos;
 	}
 
 	@Override
 	public String getName() {
 		return "Minimax-" + strategy.getName();
+	}
+	
+	@Override
+	public int getNodesVisited() {
+		return nodesVisited;
 	}
 
 }

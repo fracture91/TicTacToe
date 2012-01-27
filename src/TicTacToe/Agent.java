@@ -36,4 +36,12 @@ public abstract class Agent {
 	}
 	
 	public abstract String getName();
+	
+	/**
+	 * @return {@link TicTacToe.MinimaxAgent#getNodesVisited()} for the last turn
+	 */
+	public int getNodesVisited() {
+		return 0;
+	}
+
 }
