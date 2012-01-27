@@ -124,6 +124,7 @@ public class Director {
 	
 	/**
 	 * @return a string holding everything printed to the console during the last game
+	 * 			except human output/errors
 	 */
 	public String getLog() {
 		if(log != null) {

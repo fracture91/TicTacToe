@@ -1,5 +1,8 @@
 package TicTacToe;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * Interprets command line arguments, gets the director going, saves log file.
  */
@@ -15,8 +18,9 @@ public class Main {
 	/**
 	 * @param args Two commandline arguments representing the type of agent to use
 	 * 				Either "win", "tie", "simple", or "human", case insensitive.
+	 * @throws IOException if log files mess up
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		if(args.length != 2) {
 			System.out.println("Incorrect number of arguments");
 			printHelp();
@@ -45,7 +49,11 @@ public class Main {
 		//pass instances of proper type to director
 		final Director dir = new Director(agents[0], agents[1]);
 		dir.runGame();
-		//todo: log dir.getLog()
+		
+		String filename = "log_" + agents[0].getName() + "_vs_" + agents[1].getName() + ".txt";
+		final FileWriter output = new FileWriter(filename);
+		output.write(dir.getLog());
+		output.close();
 	}
 	
 	private static void printHelp() {
