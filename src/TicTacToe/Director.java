@@ -71,15 +71,9 @@ public class Director {
 		return type == CROSS ? player1 : player2;
 	}
 
-	/**
-	 * Try to get the given player to make a valid move
-	 * @param player The player to ask to make a move
-	 */
-	private void performTurn(Agent player) {
-		boolean valid = false;
-		
+	private void tryToGiveMove(Agent player, Position move) {
 		try {
-			player.receiveMove(lastMove);
+			player.receiveMove(move);
 		}
 		catch(Exception e) {
 			final StateException se = new StateException(state.getTurn() +
@@ -87,17 +81,36 @@ public class Director {
 			se.initCause(e);
 			throw se;
 		}
+	}
+	
+	/**
+	 * Try to get the given player to make a valid move
+	 * @param player The player to ask to make a move
+	 */
+	private void performTurn(Agent player) {
+		boolean valid = false;
 		
-		while(!valid) {
+		//give opponent's last move
+		tryToGiveMove(player, lastMove);
+		boolean human = player instanceof HumanAgent;
+		
+		do {
 			try {
-				lastMove = player.makeMove();
+				lastMove = player.getNextMove();
 				state.makeMove(lastMove);
 				valid = true;
 			} catch(Exception e) {
 				System.out.println("Erroneous move by player " + player.getName() + ":");
 				System.out.println(e.getMessage());
+				if(!human) {
+					throw new StateException("AI has failed horribly");
+				}
 			}
-		}
+		//allow humans another chance to give a valid move
+		} while (!valid && human);
+		
+		//give its own last move
+		tryToGiveMove(player, lastMove);
 	}
 	
 	/**

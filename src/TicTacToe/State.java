@@ -42,7 +42,7 @@ public class State implements Cloneable {
 		}
 	}
 	
-	private PlayerType getTypeAt(Position pos) {
+	public PlayerType getTypeAt(Position pos) {
 		try {
 			return board[pos.getRow()][pos.getColumn()];
 		} catch(ArrayIndexOutOfBoundsException e) {
@@ -174,6 +174,14 @@ public class State implements Cloneable {
 		}
 		
 		return str.toString();
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 
 }

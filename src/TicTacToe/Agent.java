@@ -11,8 +11,9 @@ public abstract class Agent {
 	protected String name = "Agent";
 
 	/**
-	 * Lets this agent know which position the opponent took in his last move
-	 * @param lastMove The position of the opponent's last move
+	 * Lets this agent know that a move has been accepted so it can update its internal state.
+	 * Should be called for both opponent's moves and this agent's moves.
+	 * @param lastMove The position of the last move
 	 */
 	public void receiveMove(Position lastMove) {
 		if(lastMove != null) {
@@ -23,7 +24,7 @@ public abstract class Agent {
 	/**
 	 * @return the next position this agent is taking
 	 */
-	public abstract Position makeMove();
+	public abstract Position getNextMove();
 	
 	/**
 	 * Initialize the agent

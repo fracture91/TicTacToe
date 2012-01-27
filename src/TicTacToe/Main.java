@@ -22,6 +22,8 @@ public class Main {
 			printHelp();
 			return;
 		}
+		
+		Agent[] agents = new Agent[2];
 		for(int i = 0; i < 2; i++) {
 			AgentType type = AgentType.valueOf(args[i].toUpperCase());
 			switch(type) {
@@ -32,15 +34,16 @@ public class Main {
 				//todo
 				break;
 			case SIMPLE:
-				//todo
+				agents[i] = new SimpleAgent();
 				break;
 			case HUMAN:
-				//todo
+				agents[i] = new HumanAgent();
 				break;
 			}
 		}
+		
 		//pass instances of proper type to director
-		final Director dir = new Director(new HumanAgent(), new HumanAgent());
+		final Director dir = new Director(agents[0], agents[1]);
 		dir.runGame();
 		//todo: log dir.getLog()
 	}
