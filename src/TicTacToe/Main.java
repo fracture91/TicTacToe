@@ -31,7 +31,7 @@ public class Main {
 				agents[i] = new MinimaxAgent(new WinUtility());
 				break;
 			case TIE:
-				//todo
+				agents[i] = new MinimaxAgent(new TieUtility());
 				break;
 			case SIMPLE:
 				agents[i] = new SimpleAgent();
